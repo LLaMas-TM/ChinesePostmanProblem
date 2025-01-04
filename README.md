@@ -29,3 +29,5 @@ pip install -r requirements.txt
 ```bash
 python tests.py
 ```
+
+![Tests](https://github.com/LLaMas-TM/ChinesePostmanProblem/actions/workflows/python-tests.yml/badge.svg)

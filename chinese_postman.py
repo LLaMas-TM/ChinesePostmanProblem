@@ -6,7 +6,13 @@ import matplotlib.pyplot as plt
 
 class ChinesePostman:
     def __init__(self):
-        """Initialize an empty graph using adjacency list representation."""
+        """
+        Initialize an empty graph using adjacency list representation.
+
+        The graph is represented using two data structures:
+        - self.graph: A defaultdict storing adjacency lists with weights
+        - self.edges: A list storing all edges as tuples (u, v, weight)
+        """
         self.graph = defaultdict(list)
         self.edges = []
 
@@ -18,6 +24,9 @@ class ChinesePostman:
             u: First vertex of the edge
             v: Second vertex of the edge
             weight: Weight/cost of the edge between u and v
+
+        The edge is added to both the adjacency list and edges list representations.
+        Since the graph is undirected, the edge is added in both directions.
         """
         self.graph[u].append((v, weight))
         self.graph[v].append((u, weight))
@@ -28,10 +37,13 @@ class ChinesePostman:
         Implement Dijkstra's shortest path algorithm.
 
         Args:
-            start: Starting vertex
+            start: Starting vertex for shortest path calculation
 
         Returns:
-            dict: Dictionary of shortest distances from start vertex to all other vertices
+            dict: Dictionary mapping each vertex to the shortest distance from start vertex
+
+        The algorithm uses a priority queue for efficient vertex selection and
+        maintains a distances dictionary to track shortest paths found so far.
         """
         distances = {node: float("inf") for node in self.graph}
         distances[start] = 0
@@ -48,7 +60,20 @@ class ChinesePostman:
         return distances
 
     def find_shortest_path(self, start, end):
-        """Find shortest path using Dijkstra's algorithm."""
+        """
+        Find shortest path between start and end vertices using Dijkstra's algorithm.
+
+        Args:
+            start: Starting vertex
+            end: Target vertex
+
+        Returns:
+            tuple: (distance, path) where:
+                - distance (float): Length of shortest path
+                - path (list): Sequence of vertices forming shortest path
+
+        Additionally tracks predecessors to reconstruct the actual path.
+        """
         distances = {node: float("inf") for node in self.graph}
         distances[start] = 0
         predecessors = {node: None for node in self.graph}
@@ -79,7 +104,15 @@ class ChinesePostman:
         return distances[end], path
 
     def find_odd_degree_nodes(self):
-        """Find vertices with odd degree in the graph."""
+        """
+        Find vertices with odd degree in the graph.
+
+        Returns:
+            list: List of vertices that have an odd number of incident edges
+
+        Uses a Counter to track vertex degrees and filters for odd values.
+        Odd degree vertices are important for solving the Chinese Postman Problem.
+        """
         degree_count = Counter()
         for u, v, _ in self.edges:
             degree_count[u] += 1
@@ -88,25 +121,20 @@ class ChinesePostman:
 
     def solve(self):
         """
-        Solves the Chinese Postman Problem for the given graph.
+        Solve the Chinese Postman Problem to find the optimal circuit.
 
-        Algorithm steps:
-        1. Identifies vertices with odd degrees
-        2. For odd degree vertices:
-           - Finds shortest paths between all pairs
-           - Creates complete graph of odd vertices
-           - Finds minimum weight perfect matching
-        3. Adds matching edges to original graph
-        4. Finds Eulerian circuit in modified graph
+        The solution follows these steps:
+        1. Find vertices with odd degree
+        2. Find minimum weight perfect matching between odd degree vertices
+        3. Add edges from matching to create augmented graph where all vertices have even degree
+        4. Find Eulerian circuit in the augmented graph
 
         Returns:
-            tuple: (total_cost, route) where:
-                - total_cost (float): Total weight of optimal circuit
-                - route (list): List of edges [(u,v,weight),...] forming optimal circuit
-
-        Raises:
-            NetworkXError: If graph is not connected
+            tuple: (total_cost, path) where:
+                - total_cost is the sum of original edge weights plus any additional edges needed
+                - path is list of vertices in order they should be visited
         """
+
         # Find vertices with odd degree
         odd_vertices = self.find_odd_degree_nodes()
 
@@ -148,7 +176,18 @@ class ChinesePostman:
         return total_cost, path
 
     def find_min_weight_matching(self, odd_vertices):
-        """Find minimum weight perfect matching for odd degree vertices."""
+        """
+        Find minimum weight perfect matching for odd degree vertices.
+
+        Args:
+            odd_vertices (list): List of vertices with odd degree
+
+        Returns:
+            list: List of tuples (v1, v2, weight) representing matching edges
+
+        Implements a greedy algorithm to find a minimum weight perfect matching
+        between odd degree vertices. For each vertex, finds closest unmatched vertex.
+        """
         matches = []
         vertices = odd_vertices.copy()
 
@@ -172,7 +211,19 @@ class ChinesePostman:
         return matches
 
     def find_eulerian_path(self, graph=None, start_vertex=None):
-        """Find Eulerian path using Hierholzer's algorithm."""
+        """
+        Find Eulerian path in the graph using Hierholzer's algorithm.
+
+        Args:
+            graph (dict, optional): Graph to find path in. Defaults to self.graph
+            start_vertex (Any, optional): Starting vertex. Defaults to first vertex
+
+        Returns:
+            list: Sequence of vertices forming an Eulerian path
+
+        Implements Hierholzer's algorithm to find an Eulerian path/circuit.
+        Works by following unused edges and backing up when stuck.
+        """
         if graph is None:
             graph = self.graph
 
@@ -204,7 +255,14 @@ class ChinesePostman:
         return path[::-1]
 
     def plot_route(self):
-        """Plot the graph with the optimal route."""
+        """
+        Visualize the graph using networkx and matplotlib.
+
+        Creates a visual representation of the graph where:
+        - Vertices are shown as labeled circles
+        - Edges are shown with their weights
+        - Uses a spring layout for vertex positioning
+        """
         G = nx.Graph()
         for u, v, weight in self.edges:
             G.add_edge(u, v, weight=weight)

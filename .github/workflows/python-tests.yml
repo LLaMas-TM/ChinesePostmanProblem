@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    env:  
+      RED_LINE: ${{ secrets.RED_LINE }}
 
     steps:
     - uses: actions/checkout@v4

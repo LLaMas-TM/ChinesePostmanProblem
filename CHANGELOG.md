@@ -18,6 +18,7 @@
 
 ### Docs
 
+- add changelog generator ([a36ba72](https://github.com/LLaMas-TM/ChinesePostmanProblem/commit/a36ba72f6519c981dc3b8ee7fd3365022c179f64) by Saklavi).
 - update docstrings with arguments ([2029dfa](https://github.com/LLaMas-TM/ChinesePostmanProblem/commit/2029dfa719c6ef41bf4f75d4b00a7a44755764c1) by Karol Stawowski).
 - Add documentation ([8dfb5e7](https://github.com/LLaMas-TM/ChinesePostmanProblem/commit/8dfb5e77ac56a204e860baf1155ccd2cd25f6f03) by Karol Stawowski).
 - add requirements.txt ([4535fd6](https://github.com/LLaMas-TM/ChinesePostmanProblem/commit/4535fd6552592014123e131d2de137e6f1ab1441) by Karol Stawowski).

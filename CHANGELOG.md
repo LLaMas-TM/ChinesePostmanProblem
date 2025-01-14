@@ -1,4 +1,12 @@
 <!-- insertion marker -->
+## [0.1.1](https://github.com/LLaMas-TM/ChinesePostmanProblem/releases/tag/0.1.1) - 2025-01-14
+
+<small>[Compare with 0.1.0](https://github.com/LLaMas-TM/ChinesePostmanProblem/compare/0.1.0...0.1.1)</small>
+
+### Chore
+
+- bump version to 0.1.1 ([8937e0b](https://github.com/LLaMas-TM/ChinesePostmanProblem/commit/8937e0bf59c893f4d612a0c7c2209b5af2ff4cbd) by Saklavi).
+
 ## [0.1.0](https://github.com/LLaMas-TM/ChinesePostmanProblem/releases/tag/0.1.0) - 2025-01-14
 
 <small>[Compare with first commit](https://github.com/LLaMas-TM/ChinesePostmanProblem/compare/9114a7aeec6421ffd8b469f8adb17c6555ad0497...0.1.0)</small>

@@ -1,3 +1,5 @@
+![Tests](https://github.com/LLaMas-TM/ChinesePostmanProblem/actions/workflows/python-tests.yml/badge.svg)
+
 # Chinese Postman Problem
 
 ## Introduction
@@ -27,7 +29,5 @@ pip install -r requirements.txt
 ### Run unit tests
 
 ```bash
-python tests.py
+python -m unittest tests.py
 ```
-
-![Tests](https://github.com/LLaMas-TM/ChinesePostmanProblem/actions/workflows/python-tests.yml/badge.svg)

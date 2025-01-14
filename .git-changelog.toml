@@ -1,0 +1,15 @@
+bump = "auto"
+convention = "angular"
+in-place = true
+#filter-commits = "0.1.0.."
+marker-line = "<!-- insertion marker -->"
+output = "CHANGELOG.md"
+parse-refs = true
+parse-trailers = true
+provider = "github"
+repository = "."
+sections = ["build", "deps", "feat", "fix", "refactor", "docs", "chore", "ci", "tests"]
+template = "keepachangelog"
+version-regex = "^## \\[(?P<version>v?[^\\]]+)"
+versioning = "semver"
+zerover = true

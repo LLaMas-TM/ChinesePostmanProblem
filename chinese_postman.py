@@ -2,6 +2,7 @@ import heapq
 from collections import defaultdict, Counter
 import networkx as nx
 import matplotlib.pyplot as plt
+from feature_flags import is_feature_enabled
 
 
 class ChinesePostman:
@@ -267,11 +268,12 @@ class ChinesePostman:
         for u, v, weight in self.edges:
             G.add_edge(u, v, weight=weight)
         pos = nx.spring_layout(G)
+        node_color = "red" if is_feature_enabled("RED_LINE") else "lightblue"
         nx.draw(
             G,
             pos,
             with_labels=True,
-            node_color="lightblue",
+            node_color=node_color,
             node_size=500,
             font_size=10,
             font_weight="bold",

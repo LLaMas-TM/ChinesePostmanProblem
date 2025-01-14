@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 
 FEATURE_FLAGS = {
     "RED_LINE": os.getenv("RED_LINE") == "true",
